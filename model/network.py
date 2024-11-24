@@ -17,4 +17,7 @@ class SimpleCNN(nn.Module):
         x = x.view(-1, 10 * 7 * 7)
         x = self.relu(self.fc1(x))
         x = self.fc2(x)
-        return x 
+        return x
+
+    def to_device(self, device):
+        return self.to(device)
