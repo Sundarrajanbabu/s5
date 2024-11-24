@@ -29,11 +29,23 @@ This project demonstrates a complete CI/CD pipeline for a machine learning model
 ## Model Architecture
 
 The model is a simple CNN with:
-- 2 convolutional layers (8 filters each)
+- 2 convolutional layers (16->8 filters)
+- 2 batch normalization layers
 - 2 max pooling layers
-- 2 fully connected layers (64 neurons in hidden layer)
+- 2 fully connected layers (32 neurons in hidden layer)
 - ReLU activation functions
-- Total parameters: ~24.5K
+- Dropout (25%)
+- Total parameters: ~14.3K
+
+## Training Details
+
+The model uses:
+- SGD optimizer with momentum (0.9)
+- OneCycleLR scheduler
+- Batch size of 128
+- Weight decay of 1e-4
+- Target accuracy: >95% in single epoch
+- CPU-only training for CI/CD compatibility
 
 ## Requirements
 
@@ -90,10 +102,10 @@ When running locally, these files are ignored by git (specified in .gitignore).
 ## Testing
 
 The test suite verifies:
-1. Model parameter count is within limits
+1. Model parameter count is within limits (<25,000)
 2. Model accepts 28x28 input images
 3. Model outputs 10 classes (digits 0-9)
-4. Model achieves >80% accuracy on test set
+4. Model achieves >95% accuracy on test set
 
 ## Notes
 
