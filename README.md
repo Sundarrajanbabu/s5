@@ -29,10 +29,11 @@ This project demonstrates a complete CI/CD pipeline for a machine learning model
 ## Model Architecture
 
 The model is a simple CNN with:
-- 2 convolutional layers
+- 2 convolutional layers (8 filters each)
 - 2 max pooling layers
-- 2 fully connected layers
+- 2 fully connected layers (64 neurons in hidden layer)
 - ReLU activation functions
+- Total parameters: ~24.5K
 
 ## Requirements
 
