@@ -2,6 +2,7 @@ import torch
 import pytest
 from model.network import SimpleCNN
 from torchvision import datasets, transforms
+from tqdm import tqdm
 
 def test_model_parameters():
     model = SimpleCNN()
@@ -39,8 +40,9 @@ def test_model_accuracy():
     correct = 0
     total = 0
     
+    print("\nTesting model accuracy...")
     with torch.no_grad():
-        for data, target in test_loader:
+        for data, target in tqdm(test_loader, desc="Evaluating"):
             data, target = data.to(device), target.to(device)
             outputs = model(data)
             _, predicted = torch.max(outputs.data, 1)
@@ -48,4 +50,10 @@ def test_model_accuracy():
             correct += (predicted == target).sum().item()
     
     accuracy = 100 * correct / total
-    assert accuracy > 80, f"Model accuracy is {accuracy}%, should be > 80%" 
+    print(f"\nTest Results:")
+    print(f"Total samples: {total}")
+    print(f"Correct predictions: {correct}")
+    print(f"Accuracy: {accuracy:.2f}%")
+    print(f"Status: {'✅ PASSED' if accuracy > 95 else '❌ FAILED'}")
+    
+    assert accuracy > 95, f"Model accuracy is {accuracy:.2f}%, should be > 95%"
