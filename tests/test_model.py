@@ -6,6 +6,7 @@ from torchvision import datasets, transforms
 def test_model_parameters():
     model = SimpleCNN()
     total_params = sum(p.numel() for p in model.parameters())
+    print(f"\nTotal parameters in model: {total_params:,}")
     assert total_params < 100000, f"Model has {total_params} parameters, should be less than 100000"
 
 def test_input_output_dimensions():
